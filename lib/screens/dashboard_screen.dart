@@ -10,9 +10,10 @@ import '../widgets/app_bottom_navigation.dart';
 import '../widgets/connectivity_status_card.dart';
 
 // Import the screens used for Dashboard navigation.
-import 'placeholder_screen.dart';
 import 'my_notes_screen.dart';
 import 'connectivity_screen.dart';
+
+import 'explore_rights_screen.dart';
 
 // ======================================================
 // KNOW UR RIGHTS - DASHBOARD SCREEN
@@ -32,33 +33,34 @@ import 'connectivity_screen.dart';
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
 
-  // ----------------------------------------------------
-  // 1. TEMPORARY SCREEN NAVIGATION
-  // ----------------------------------------------------
-  // Opens a temporary placeholder screen for features
-  // that have not yet been integrated into the project.
-  // This allows the Dashboard navigation to be tested
-  // before all group members' screens are connected.
-  // The optional category parameter identifies which
-  // rights category was selected by the user.
-  void _openPlaceholder(
-    BuildContext context,
-    String title, {
-    String? category,
-  }) {
+// ----------------------------------------------------
+// 1. EXPLORE RIGHTS NAVIGATION
+// ----------------------------------------------------
+// Opens Sai's Explore Rights screen when users
+// select a rights category or the Explore tab.
+void _openExploreRights(
+  BuildContext context, {
+  String? category,
+}) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => ExploreRightsScreen(
+        initialCategory: category,
 
-    // Navigator.push opens a new screen while keeping
-    // the current Dashboard in the navigation stack.
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => PlaceholderScreen(
-          title: title,
-          category: category,
-        ),
+        // Returns to Dashboard when Home is selected.
+        onHomeTap: () {
+          Navigator.pop(context);
+        },
+
+        // Opens My Notes when Notes is selected.
+        onNotesTap: () {
+          _openMyNotes(context);
+        },
       ),
-    );
-  }
+    ),
+  );
+}
 
   // ----------------------------------------------------
   // 2. MY NOTES NAVIGATION
@@ -131,14 +133,10 @@ class DashboardScreen extends StatelessWidget {
           // A placeholder is used temporarily until
           // Sai's Explore Rights screen is integrated.
           if (index == 1) {
-            _openPlaceholder(
-              context,
-              'Explore Rights',
-            );
+            _openExploreRights(context);
           }
 
           // Index 2 represents My Notes.
-          //
           // Opens the actual My Notes screen.
           if (index == 2) {
             _openMyNotes(context);
@@ -225,9 +223,8 @@ class DashboardScreen extends StatelessWidget {
                       // Open the Employment category
                       // placeholder when tapped.
                       onTap: () {
-                        _openPlaceholder(
+                        _openExploreRights(
                           context,
-                          'Explore Rights',
                           category: 'Employment',
                         );
                       },
@@ -251,9 +248,8 @@ class DashboardScreen extends StatelessWidget {
                       // Open the Consumer category
                       // placeholder when tapped.
                       onTap: () {
-                        _openPlaceholder(
+                        _openExploreRights(
                           context,
-                          'Explore Rights',
                           category: 'Consumer',
                         );
                       },
@@ -287,9 +283,8 @@ class DashboardScreen extends StatelessWidget {
                       // Open the Digital category
                       // placeholder when tapped.
                       onTap: () {
-                        _openPlaceholder(
+                        _openExploreRights(
                           context,
-                          'Explore Rights',
                           category: 'Digital',
                         );
                       },
@@ -313,9 +308,8 @@ class DashboardScreen extends StatelessWidget {
                       // Open the Housing category
                       // placeholder when tapped.
                       onTap: () {
-                        _openPlaceholder(
+                        _openExploreRights(
                           context,
-                          'Explore Rights',
                           category: 'Housing',
                         );
                       },
@@ -443,11 +437,12 @@ class DashboardScreen extends StatelessWidget {
                 size: 29,
               ),
 
-              // Open the temporary Profile screen.
+              // Show a temporary message when Profile is tapped.
               onPressed: () {
-                _openPlaceholder(
-                  context,
-                  'Profile',
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Profile feature coming soon!'),
+                  ),
                 );
               },
             ),

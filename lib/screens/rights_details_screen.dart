@@ -5,6 +5,9 @@ import 'package:flutter/services.dart';
 import '../models/rights_issue.dart';
 import '../theme/app_theme.dart';
 
+import 'my_notes_screen.dart';
+import 'dashboard_screen.dart';
+
 // Reusable Rights Details screen.
 // The displayed information changes based on the selected issue.
 class RightsDetailsScreen extends StatelessWidget {
@@ -542,7 +545,8 @@ class RightsDetailsScreen extends StatelessWidget {
     );
   }
 
-  // BOTTOM NAVIGATION - TEMPORARY
+ 
+  // BOTTOM NAVIGATION
   Widget buildBottomNavigation(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
@@ -559,16 +563,22 @@ class RightsDetailsScreen extends StatelessWidget {
         child: SizedBox(
           height: 58,
           child: Row(
-            mainAxisAlignment:
-                MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+
               // HOME
               Expanded(
                 child: InkWell(
-                  onTap: () => showMessage(
-                    context,
-                    'Home will be connected later',
-                  ),
+                  onTap: () {
+                    // Navigate directly to Dashboard.
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const DashboardScreen(),
+                      ),
+                      (route) => false,
+                    );
+                  },
                   child: const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -585,7 +595,10 @@ class RightsDetailsScreen extends StatelessWidget {
               // EXPLORE - ACTIVE TAB
               Expanded(
                 child: InkWell(
-                  onTap: () => Navigator.pop(context),
+                  onTap: () {
+                    // Return to Explore Rights.
+                    Navigator.pop(context);
+                  },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -617,10 +630,15 @@ class RightsDetailsScreen extends StatelessWidget {
               // NOTES
               Expanded(
                 child: InkWell(
-                  onTap: () => showMessage(
-                    context,
-                    'Notes will be connected later',
-                  ),
+                  onTap: () {
+                    // Open My Notes.
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MyNotesScreen(),
+                      ),
+                    );
+                  },
                   child: const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -636,6 +654,7 @@ class RightsDetailsScreen extends StatelessWidget {
                   ),
                 ),
               ),
+
             ],
           ),
         ),
@@ -706,8 +725,7 @@ class RightsDetailsScreen extends StatelessWidget {
       ),
 
       // FIXED BOTTOM NAVIGATION
-      bottomNavigationBar:
-          buildBottomNavigation(context),
+      bottomNavigationBar: buildBottomNavigation(context),
     );
   }
 }
