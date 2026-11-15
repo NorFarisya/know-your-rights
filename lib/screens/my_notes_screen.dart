@@ -19,8 +19,8 @@ import '../widgets/note_action_button.dart';
 
 // Import screens used for navigation.
 import 'dashboard_screen.dart';
+import 'explore_rights_screen.dart';
 import 'create_edit_note_screen.dart';
-import 'placeholder_screen.dart';
 
 // ======================================================
 // KNOW UR RIGHTS - MY NOTES SCREEN
@@ -64,9 +64,7 @@ class MyNotesScreen extends StatelessWidget {
       ),
     );
 
-    // Check whether the screen is still mounted and
-    // whether the user successfully saved a note.
-    //
+    // Check whether the screen is still mounted and whether the user successfully saved a note.
     // If the user presses Cancel, null is returned
     // and no new note is added.
     if (!context.mounted || newNote == null) return;
@@ -128,17 +126,31 @@ class MyNotesScreen extends StatelessWidget {
   // Opens a temporary Explore Rights placeholder.
   // This allows the bottom navigation to be tested
   // before Sai's Explore Rights screen is integrated.
-  void _openExplore(BuildContext context) {
+    void _openExplore(BuildContext context) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => ExploreRightsScreen(
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => const PlaceholderScreen(
-          title: 'Explore Rights',
+            // Home button returns directly to Dashboard.
+            onHomeTap: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const DashboardScreen(),
+                ),
+                (route) => false,
+              );
+            },
+
+            // Notes button returns to the existing My Notes screen.
+            onNotesTap: () {
+              Navigator.pop(context);
+            },
+          ),
         ),
-      ),
-    );
-  }
+      );
+    }
 
   // ----------------------------------------------------
   // 5. NOTE CATEGORY BACKGROUND COLOURS
@@ -211,43 +223,34 @@ class MyNotesScreen extends StatelessWidget {
       // Use the shared application background colour.
       backgroundColor: AppColors.background,
 
-      // ------------------------------------------------
-      // 8. BOTTOM NAVIGATION BAR
-      // ------------------------------------------------
-      // Reuse the shared bottom navigation widget.
-      // currentIndex: 2 indicates that Notes is selected.
-      bottomNavigationBar: AppBottomNavigation(
-        currentIndex: 2,
+            // ------------------------------------------------
+            // 8. BOTTOM NAVIGATION BAR
+            // ------------------------------------------------
+            // Reuse the shared bottom navigation widget.
+            // currentIndex: 2 indicates that Notes is selected.    
+            bottomNavigationBar: AppBottomNavigation(
+              currentIndex: 2,
 
-        // Handle navigation when a user selects
-        // an item from the bottom navigation bar.
-        onTap: (index) {
+              onTap: (index) {
 
-          // Index 0 represents the Dashboard/Home tab.
-          if (index == 0) {
+                // HOME - Return directly to Dashboard.
+                if (index == 0) {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const DashboardScreen(),
+                    ),
+                    (route) => false,
+                  );
+                }
 
-            // Return to the previous screen if possible.
-            if (Navigator.canPop(context)) {
-              Navigator.pop(context);
-            } else {
+                // EXPLORE - Open Sai's actual Explore Rights screen.
+                else if (index == 1) {
+                  _openExplore(context);
+                }
+              },
+            ),
 
-              // Otherwise, open the Dashboard directly.
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => const DashboardScreen(),
-                ),
-              );
-            }
-
-          // Index 1 represents Explore Rights.
-          } else if (index == 1) {
-
-            // Open the temporary Explore Rights screen.
-            _openExplore(context);
-          }
-        },
-      ),
 
       // ------------------------------------------------
       // 9. MAIN SCREEN CONTENT

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../models/rights_issue.dart';
+import '../models/personal_note.dart';
+import '../services/note_storage_service.dart';
 import '../theme/app_theme.dart';
 
 import 'my_notes_screen.dart';
@@ -480,6 +482,50 @@ class RightsDetailsScreen extends StatelessWidget {
     );
   }
 
+  // SAVE RIGHTS ISSUE TO MY NOTES
+  void _saveToNotes(BuildContext context) {
+
+    // Access the shared note storage.
+    final storage = NoteStorageService.instance;
+
+    // Check whether this issue has already been saved.
+    final alreadySaved = storage.notes.value.any(
+      (note) =>
+          note.title.trim().toLowerCase() ==
+              issue.title.trim().toLowerCase() &&
+          note.category.trim().toLowerCase() ==
+              issue.category.trim().toLowerCase(),
+    );
+
+    // Prevent duplicate notes.
+    if (alreadySaved) {
+      showMessage(
+        context,
+        'This issue is already saved in My Notes.',
+      );
+      return;
+    }
+
+    // Create a new personal note using the selected issue.
+    final newNote = PersonalNote(
+      title: issue.title,
+      category: issue.category,
+      description: issue.problemOverview.isNotEmpty
+          ? issue.problemOverview
+          : issue.description,
+      isExample: false,
+    );
+
+    // Add the new note to shared temporary storage.
+    storage.addNote(newNote);
+
+    // Display confirmation.
+    showMessage(
+      context,
+      'Successfully saved to My Notes!',
+    );
+  }
+
   // ACTION BUTTONS
   Widget buildActionButtons(BuildContext context) {
     return Padding(
@@ -494,10 +540,7 @@ class RightsDetailsScreen extends StatelessWidget {
               height: 43,
               child: ElevatedButton.icon(
                 onPressed: () {
-                  showMessage(
-                    context,
-                    'Save to Notes will be connected later',
-                  );
+                  _saveToNotes(context);
                 },
                 icon: const Icon(
                   Icons.bookmark_border,
