@@ -1,33 +1,35 @@
 
 import '../models/rights_issue.dart';
 
-// KNOW YOUR RIGHTS
-// Hard-coded rights information for Practical 1.
-// Information is based on Malaysian legislation
-// and official government guidance.
+// Here will store all the rights information used in the app
+// The information is first written here so later the screens can just
+// retrieve and display it without repeating the same content in the UI
+
+// A constant list is used because the rights information is prepared
+// in advance and won t need to change while the application is running.
+// Each RightsIssue object represents one common rights-related problem.
 
 const List<RightsIssue> rightsIssues = [
-
-  // ==========================================
   // 1. EMPLOYMENT RIGHTS - UNPAID SALARY
-  // ==========================================
-
   RightsIssue(
+    // These fields are the issues and give a short description
+    // that will show on the Explore Rights screen.
     title: 'Unpaid Salary',
     category: 'Employment',
 
-    // Short description shown on Explore Rights.
     description:
         'Learn what actions employees can take when wages are delayed.',
 
-    // PROBLEM OVERVIEW
+    // Explains the problem so users can understand the situation
+    // before reading about their legal rights.
     problemOverview:
         'Unpaid salary occurs when an employee does not receive '
         'their wages by the required payment deadline or is not '
         'paid the amount lawfully owed.',
 
-    // WHAT ARE YOUR RIGHTS?
-    // Employment Act 1955, Section 19(1)-(3).
+    // A list is used because each issue can have several rights.
+    // These points are based on the Employment Act 1955,
+    // Section 19(1)-(3).
     rights: [
       'Employers must generally pay wages within 7 days '
           'after the wage period ends.',
@@ -39,9 +41,9 @@ const List<RightsIssue> rightsIssues = [
           'extension of the payment deadline.',
     ],
 
-    // SUGGESTED NEXT STEPS
-    // Based on JTKSM complaint guidance and
-    // general practical recommendations.
+    // Provides practical steps that users can follow
+    // if they are experiencing an unpaid salary problem.
+    // The steps are based on JTKSM guidance and general recommendations.
     nextSteps: [
       'Check your employment contract and salary payment dates.',
 
@@ -52,7 +54,7 @@ const List<RightsIssue> rightsIssues = [
       'If unresolved, consider filing a complaint with JTKSM.',
     ],
 
-    // WHERE TO SEEK HELP
+    // Lists down the government agency where users can seek assistance
     agencyName:
         'Jabatan Tenaga Kerja Semenanjung Malaysia (JTKSM)',
 
@@ -60,7 +62,9 @@ const List<RightsIssue> rightsIssues = [
         'JTKSM handles employment-related complaints, '
         'including breaches of employment terms and conditions.',
 
-    // VERIFIED LEGAL REFERENCES AND OFFICIAL GUIDANCE
+    // LegalSource objects store the reference title, description
+    // and URL together. This helps to makes it easier by displaying the sources
+    // and allow users to access the original information.
     sources: [
       LegalSource(
         title: 'Employment Act 1955 (Act 265)',
@@ -82,45 +86,41 @@ const List<RightsIssue> rightsIssues = [
   ),
 
 
-  // ==========================================
   // 2. CONSUMER RIGHTS - FAULTY PRODUCT
-  // ==========================================
-
   RightsIssue(
     title: 'Faulty Product',
     category: 'Consumer',
 
-    // Short description shown on Explore Rights.
-    // Kept unchanged to preserve the existing UI.
+    //  This  description will appear on the Explore Rights screen
+
     description:
         'Understand your options when a purchased item is defective.',
 
-    // PROBLEM OVERVIEW
-    // Consumer Protection Act 1999, Section 32.
+    // Describes common situations involving defective or unsafe goods.
+    // Based on the Consumer Protection Act 1999, Section 32.
     problemOverview:
         'A faulty product may be defective, unsafe, or unable '
         'to function as reasonably expected. Consumers may '
         'have legal remedies depending on the nature of the problem.',
 
-    // WHAT ARE YOUR RIGHTS?
-    // Consumer Protection Act 1999, Sections 32, 41, 45 and 46.
+    // Lists the main consumer protections related to faulty goods.
+    // Each point is based on the relevant provisions of Act 599.
     rights: [
-      // Section 32(1)-(2)
+      // Section 32(1)-(2): Acceptable quality of goods.
       'Goods supplied to consumers must meet acceptable '
           'quality standards, including safety and durability.',
 
-      // Section 41(1)(a)
+      // Section 41(1)(a): Remedy for certain failures.
       'Consumers may require suppliers to remedy certain '
           'defects within a reasonable time.',
 
-      // Sections 45 and 46(1)
+      // Sections 45 and 46(1): Rights to reject eligible goods.
       'If legally entitled to reject faulty goods, '
           'consumers may choose a refund or an eligible replacement.',
     ],
 
-    // SUGGESTED NEXT STEPS
-    // Based on statutory remedies, TTPM guidance and
-    // practical evidence-preservation recommendations.
+    // Gives the users simple actions to take when they receive
+    // a defective product and tells them to keep evidence of the problem.
     nextSteps: [
       'Keep the purchase receipt and photograph the defect.',
 
@@ -131,7 +131,7 @@ const List<RightsIssue> rightsIssues = [
       'If unresolved, consider filing an eligible claim with TTPM.',
     ],
 
-    // WHERE TO SEEK HELP
+    // Identifies the tribunal that handles eligible consumer claims.
     agencyName:
         'Tribunal Tuntutan Pengguna Malaysia (TTPM)',
 
@@ -140,7 +140,8 @@ const List<RightsIssue> rightsIssues = [
         'involving goods and services. Claims are subject to '
         'the tribunal\'s jurisdiction and requirements.',
 
-    // LEGAL REFERENCES AND OFFICIAL GUIDANCE
+    // Stores the legislation and official tribunal guidance
+    // so users can refer to the original sources.
     sources: [
       LegalSource(
         title: 'Consumer Protection Act 1999 (Act 599)',
@@ -159,56 +160,60 @@ const List<RightsIssue> rightsIssues = [
         url:
             'https://ttpm.kpdn.gov.my/soalan-lazim.html',
       ),
-    ],    
+    ],
   ),
 
 
-
-  // ==========================================
   // 3. DIGITAL RIGHTS - ONLINE SCAM
-  // ==========================================
+  
 
   RightsIssue(
     title: 'Online Scam',
     category: 'Digital',
 
-    // Short description shown on Explore Rights.
-    // Kept unchanged to preserve the existing UI.
+
     description:
         'Find out what to do if you believe you were scammed online.',
 
-    // PROBLEM OVERVIEW
-    // Based on the Penal Code Sections 415 and 420.
+    // Explains how scammers use digital platforms to deceive people.
+    // The legal background is based on Penal Code Sections 415 and 420.
     problemOverview:
         'An online scam occurs when someone uses deception '
         'through digital platforms to obtain money, property '
         'or sensitive information from another person.',
 
-    // WHAT ARE YOUR RIGHTS?
-    // Penal Code Section 420 and official reporting guidance.
+    // Shows the legal protection and reporting options available
+    // to people who have experienced an online scam.
     rights: [
+
       // Penal Code (Act 574), Section 420.
+      
       'Dishonestly deceiving someone into handing over '
           'property may be an offence under Section 420 '
           'of the Penal Code.',
 
-      // Bank Negara Malaysia - Financial Scams FAQ.
+      // Based on Bank Negara Malaysia financial scam guidance.
       'Victims of financial scams can report the incident '
           'to their bank or NSRC at 997.',
 
-      // Bank Negara Malaysia and PDRM guidance.
+      // Users can also report suspected criminal activity to the police.
       'Suspected scams can be reported to the police '
           'for investigation.',
     ],
 
-    // SUGGESTED NEXT STEPS
-    // Based on BNM and official NSRC guidance.
+    // Lists the recommended actions users should take after
+    // finding out that they may have been scammed.
+
     nextSteps: [
+      // Contacting the bank or NSRC quickly is important
+      // when money has been transferred or lost.
+
       'Immediately contact your bank or NSRC at 997 '
           'if money is involved.',
 
       'Lodge a police report as soon as possible.',
 
+      // Keeping evidence can help support the investigation.
       'Keep transaction records, messages and '
           'screenshots as evidence.',
 
@@ -216,7 +221,8 @@ const List<RightsIssue> rightsIssues = [
           'further personal information.',
     ],
 
-    // WHERE TO SEEK HELP
+    // NSRC is included as the main contact point for
+    // reporting recent financial scams.
     agencyName:
         'National Scam Response Centre (NSRC)',
 
@@ -225,7 +231,8 @@ const List<RightsIssue> rightsIssues = [
         'You should also contact your bank and lodge '
         'a police report.',
 
-    // LEGAL REFERENCES AND OFFICIAL GUIDANCE
+    // Includes the relevant legislation and official reporting
+    // resources so users can find more detailed information.
     sources: [
       LegalSource(
         title: 'Penal Code (Act 574)',
@@ -241,7 +248,7 @@ const List<RightsIssue> rightsIssues = [
       ),
 
       LegalSource(
-        title: 'Bank Negara Malaysia - Financial Scams',
+        title:'Bank Negara Malaysia - Financial Scams',
         description:
             'Official guidance on reporting financial '
             'scams to banks, NSRC and the police.',
@@ -250,7 +257,7 @@ const List<RightsIssue> rightsIssues = [
       ),
 
       LegalSource(
-        title: 'NSRC - Official Government Guidance',
+        title:'NSRC - Official Government Guidance',
         description:
             'Information about scam reporting '
             'and the NSRC 997 hotline.',
@@ -261,7 +268,7 @@ const List<RightsIssue> rightsIssues = [
       ),
 
       LegalSource(
-        title: 'BNM - Unauthorized Transactions',
+        title:'BNM - Unauthorized Transactions',
         description:
             'Additional banking safety guidance '
             'and protective measures.',
@@ -272,47 +279,42 @@ const List<RightsIssue> rightsIssues = [
   ),
 
 
-
-  // ==========================================
   // 4. HOUSING RIGHTS - RENTAL DEPOSIT DISPUTE
-  // ==========================================
 
   RightsIssue(
     title: 'Rental Deposit Dispute',
     category: 'Housing',
 
-    // Short description shown on Explore Rights.
-    // Kept unchanged to preserve the existing UI.
     description:
         'Explore common steps for resolving rental deposit concerns.',
 
-    // PROBLEM OVERVIEW
-    // Based on tenancy agreements and contract law.
+    // Explains the disagreement between a landlord and tenant
+    // when part or all of a rental deposit is withheld
+
     problemOverview:
         'A rental deposit dispute occurs when a landlord '
         'withholds all or part of a tenant\'s deposit and '
         'the tenant disagrees with the deduction or reason given.',
 
-    // WHAT ARE YOUR RIGHTS?
-    // Contracts Act 1950, Section 74.
-    // Rules of Court 2012, Order 93.
+    // List down the main contractual rights and possible legal remedies.
+    // Based on the Contracts Act 1950 and Rules of Court 2012.
     rights: [
-      // Contractual obligations.
+    // Deposit conditions are generally based on the tenancy agreement.
       'Deposit refunds and deductions depend on the '
           'tenancy agreement and applicable law.',
 
       // Contracts Act 1950, Section 74(1)-(2).
+      // Compensation depends on whether the loss is legally recoverable.
       'Compensation may be available if a breach of '
           'contract causes a legally recoverable loss.',
 
-      // Malaysian Judiciary - Civil and Small Claims.
+      // Eligible claims may be brought through civil court procedures.
       'Eligible disputes may be pursued through '
           'civil court procedures, including small claims.',
     ],
 
-    // SUGGESTED NEXT STEPS
-    // Based on judiciary guidance and practical
-    // dispute-resolution recommendations.
+    // Suggests practical steps that tenants can follow
+    // before deciding whether to pursue a legal claim.
     nextSteps: [
       'Review your tenancy agreement and deposit conditions.',
 
@@ -323,7 +325,8 @@ const List<RightsIssue> rightsIssues = [
       'If unresolved, consider an appropriate civil claim.',
     ],
 
-    // WHERE TO SEEK HELP
+    // Identifies the Malaysian Judiciary as the main place
+    // where eligible landlord-tenant civil disputes can be pursued.
     agencyName:
         'Malaysian Judiciary - Civil Courts',
 
@@ -332,7 +335,8 @@ const List<RightsIssue> rightsIssues = [
         'claims. Eligible individual claims up to RM5,000 '
         'may use the Small Claims procedure.',
 
-    // LEGAL REFERENCES AND OFFICIAL GUIDANCE
+    // Stores the legal provision and official court guidance
+    // related to contractual disputes and small claims.
     sources: [
       LegalSource(
         title: 'Contracts Act 1950 (Act 136)',

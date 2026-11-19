@@ -44,7 +44,7 @@ class RightsIssue {
     required this.description,
 
     // Optional for now because detailed content
-    // will be added one issue at a time.
+    // has been added one issue at a time.
     this.problemOverview = '',
     this.rights = const [],
     this.nextSteps = const [],

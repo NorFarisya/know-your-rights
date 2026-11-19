@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-// Shared colours and styling for Know Your Rights.
+// Shared colours and styling for the app is all here, we just reuse
 class AppTheme {
 
   // Official Canva colour palette.

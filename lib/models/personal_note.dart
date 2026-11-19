@@ -7,6 +7,7 @@
 // and example status of each note.
 // The PersonalNote model is shared between the
 // Create/Edit Note screen and NoteStorageService.
+
 class PersonalNote {
 
   // ----------------------------------------------------
@@ -35,10 +36,8 @@ class PersonalNote {
   // ----------------------------------------------------
   // Creates a PersonalNote object containing
   // the information required for each note.
-  //
   // required ensures that the title, category
   // and description must be provided.
-  //
   // isExample is optional and defaults to false
   // for notes created by the user.
   const PersonalNote({
